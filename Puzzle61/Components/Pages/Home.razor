@@ -1,0 +1,34 @@
+﻿@page "/"
+@inject IStringLocalizer<Strings> Localizer
+@rendermode @(new InteractiveServerRenderMode(false))
+
+<PageTitle>Home</PageTitle>
+
+<h1>@Localizer["HelloWorld"]</h1>
+
+<p>
+	We are attempting to provide translations for this application. Unfortunately it looks like we're running into 
+	a number of errors while we're trying to get it to compile and resolve the translations that we've provided.
+</p>
+
+<p>
+	Can you fix the error that's happening in the section below and get the translations to display correctly?
+</p>
+
+
+
+<ErrorBoundary>
+	<ChildContent>
+@foreach (var item in Localizer.GetAllStrings())
+{
+	<p>@item.Name: @item.Value</p>
+}
+	</ChildContent>
+	<ErrorContent>
+		<p class="alert alert-danger">There was an error: @context.Message
+			<br/>
+			Current culture:
+			@System.Globalization.CultureInfo.CurrentCulture.Name
+		</p>
+	</ErrorContent>
+</ErrorBoundary>
