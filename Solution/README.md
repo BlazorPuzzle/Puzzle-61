@@ -12,3 +12,16 @@ We are attempting to provide translations for this application. Unfortunately it
 
 Can you fix the error that's happening on the home page and get the translations to display correctly?
 
+### The Solution:
+
+The problem is in *Program.cs*:
+
+```c#
+// The solution is to not to specify the resources path. 
+// It confuses the localization system.
+
+//builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddLocalization();
+```
+
+Boom!
